@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+encoding//wizard/import_payroll.py=utf8
+encoding/__init__.py=utf-8
+encoding/__openerp__.py=utf-8
+encoding/defbase.py=utf-8
+encoding/defstat.py=utf-8
+encoding/glomodule.py=utf8
+encoding/lib_paie.py=utf-8
+encoding/mbu3d.py=utf-8
+encoding/payroll_base.py=utf-8
+encoding/payroll_data.py=utf-8
+encoding/payroll_loan.py=utf-8
+encoding/payroll_process.py=utf-8
+encoding/py_employee.py=utf-8
+encoding/py_process.py=utf8
+encoding/py_rubrique.py=utf-8
+encoding/register.py=utf-8
