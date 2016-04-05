@@ -31,7 +31,10 @@
     'summary': 'Interface odoo-Blender',
     'sequence': 0,
     'depends': ['sale_crm'],
-    'data': [],
+    'data': [
+        'views/mbu_crm_view.xml',
+        'security/mbu3d_security.xml',
+        'security/ir.model.access.csv',],
     'demo': [],
     'auto_install': True,
     'installable': True,
