@@ -22,23 +22,6 @@ from openerp import tools
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
 
-class res_partner(osv.osv):  
-    
-    _inherit= "res.partner" 
-    
-    def to_dict(self,cr,uid,id=None):
-        
-        dict_partner={}
-        id = self.search(cr,uid, [('id','=',id)])
-        
-        if id:
-            partner = self.browse(cr,uid, id)[0]  
-            dict_partner['id']=partner.id
-            dict_partner['name']=partner.name
-            
-            return dict_partner
-        else:
-            return dict_partner
 
 class mbu_crm_lead_blender_model(osv.osv):
     
@@ -94,6 +77,7 @@ class mbu_crm_lead(osv.osv):
     
     _defaults = {'blender_project': 'none' }
     
+         
     
     def blender_set_products(self,cr,uid,lead_id,context):
         if lead_id:
@@ -106,7 +90,7 @@ class mbu_crm_lead(osv.osv):
                 pool_product = self.pool.get('product.product')
                 sequence = 0
                 for ref_prod in blender_select.products.iteritems():
-                    product_id = pool_product.search(cr,uid,[('ref_product','=',ref_prod['ref_interne'])])
+                    product_id = pool_product.search(cr,uid,[('default_code','=',ref_prod['ref_interne'])])
                     if product_id:
                         lead_prod = {'lead_id':lead_id,
                                      'sequence':sequence,
