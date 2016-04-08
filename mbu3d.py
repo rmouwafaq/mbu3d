@@ -77,8 +77,6 @@ class mbu_crm_lead(osv.osv):
     
     _defaults = {'blender_project': 'none' }
     
-         
-    
     def blender_set_products(self,cr,uid,lead_id,context):
         if lead_id:
             pool_lead_prod = self.pool.get('crm.lead.product')
@@ -89,19 +87,22 @@ class mbu_crm_lead(osv.osv):
             if blender_select:
                 pool_product = self.pool.get('product.product')
                 sequence = 0
-                for ref_prod in blender_select.products.iteritems():
-                    product_id = pool_product.search(cr,uid,[('default_code','=',ref_prod['ref_interne'])])
+                items=[]
+                for ref_prod, quantity in blender_select['products'].iteritems():
+                    product_id = pool_product.search(cr,uid,[('default_code','=',ref_prod)])[0]
                     if product_id:
                         lead_prod = {'lead_id':lead_id,
                                      'sequence':sequence,
-                                     'name':ref_prod['name'],
+                                     'name':ref_prod,
                                      'product_id': product_id,
-                                     'product_qty':ref_prod['product_qty'],   
+                                     'product_qty':quantity,   
                                      }
-                        pool_lead_prod.create(cr,uid,lead_prod)
+                        items.append((0,0,lead_prod))
                         sequence +=1 
                     else: 
-                        print 'reference produit inexistante ',ref_prod['ref_interne']
+                        print 'reference produit inexistante ',ref_prod
+                
+        return self.write(cr,uid,lead_id,{'lead_product_ids':items})
     
 class mbu_crm_lead_product(osv.osv):
     
@@ -110,9 +111,9 @@ class mbu_crm_lead_product(osv.osv):
     _columns = {
         'lead_id': fields.many2one('crm.lead', 'Lead Reference', required=True, 
                                    ondelete='cascade', select=True, readonly=True),
-        'name': fields.char('Description', size=64, required=True, select=True),
+        'name': fields.char('Description', size=64),
         'sequence': fields.integer('Sequence', help="Gives the sequence order when displaying a list of product lines."),
-        'product_id': fields.many2one('product.product', 'Product', domain=[('sale_ok', '=', True)], change_default=True, readonly=True, states={'draft': [('readonly', False)]}, ondelete='restrict'),
+        'product_id': fields.many2one('product.product', 'Product', ondelete='restrict'),
         'product_qty': fields.float('Quantity ' ,readonly=True),
     }
     
