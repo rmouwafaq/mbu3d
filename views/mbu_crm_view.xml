@@ -5,13 +5,13 @@
 		<record model="ir.ui.view" id="crm_case_form_view_oppor">
 			<field name="name">CRM - Opportunities - Blender Inherit</field>
 			<field name="model">crm.lead</field>
-			<field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+			<field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
 			<field name="arch" type="xml">
 				<data>
 					<xpath expr="//field[@name='user_id']" position="before">
 						<field name="is_blender_lead"/>
 					</xpath>
-					<xpath expr="//page[@string='Lead']" position="after">
+					<xpath expr="//page[@name='extra']" position="after">
 						<page string="Modelisation 3D">
 							<group>
 								<field name="lead_product_ids" nolabel="1">

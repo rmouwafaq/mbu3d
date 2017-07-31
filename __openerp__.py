@@ -24,13 +24,13 @@
     'version': '1.0',
     'category' : 'Modelisation 3D',
     'description': """
-     Interface entre Blender et Odoo  
+     Interface entre UE4 et Odoo
     """,
     'author': ["Agilorg "],
     'website': ['http://www.agilorg.com'],
     'summary': 'Interface odoo-Blender',
     'sequence': 0,
-    'depends': ['sale_crm'],
+    'depends': ['crm','sale_crm'],
     'data': [
         'views/mbu_crm_view.xml',
         'security/mbu3d_security.xml',
