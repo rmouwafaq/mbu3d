@@ -89,7 +89,7 @@ class mbu_crm_lead(osv.osv):
                 sequence = 0
                 items=[]
                 for ref_prod, quantity in blender_select['products'].iteritems():
-                    product_id = pool_product.search(cr,uid,[('default_code','=',ref_prod)])[0]
+                    product_id = pool_product.search(cr,uid,[('default_code','=',ref_prod)]).get(0)
                     if product_id:
                         lead_prod = {'lead_id':lead_id,
                                      'sequence':sequence,
